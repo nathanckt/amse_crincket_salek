@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'exo1.dart'; 
+import 'exo2.dart';
 
 
 void main() {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'TP Flutter',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: Exo1(), // Afficher directement Exo1
+      home: Exo2(),
     );
   }
 }
