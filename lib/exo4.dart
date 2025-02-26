@@ -12,9 +12,12 @@ class Tile {
       child: ClipRect(
         child: Container(
           child: Align(
-            alignment: this.alignment,
-            widthFactor: 0.1,
-            heightFactor: 0.1,
+            alignment: Alignment(
+                    -1.0 + (0 * 2.0 / (3 - 1)),
+                    -1.0 + (0 * 2.0 / (3 - 1)),
+                  ),
+            widthFactor: 1/3,
+            heightFactor: 1/3,
             child: Image.network(this.imageURL),
           ),
         ),

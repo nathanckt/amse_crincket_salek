@@ -54,6 +54,8 @@ class Grid extends StatelessWidget {
           itemBuilder: (context, index) {
             int row = index ~/ gridSize;
             int col = index % gridSize;
+            print(row);
+            print(gridSize);
 
             return SizedBox(
               width: tileSize,
