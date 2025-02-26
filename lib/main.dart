@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'exo1.dart'; 
 import 'exo2.dart';
 import 'exo4.dart';
+import 'exo5.dart';
 
 
 void main() {
@@ -59,6 +60,18 @@ class MenuPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => DisplayTileWidget()),
+                );
+              },
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: ListTile(
+              title: Text('Exercice 5'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Exo5()),
                 );
               },
             ),
