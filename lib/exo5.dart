@@ -44,15 +44,15 @@ class Grid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         double tileSize = constraints.maxWidth / gridSize;
-        double paddingSize = 2.0; // Taille de l'espacement entre les cases
+        double paddingSize = 2.0; 
 
         return GridView.builder(
           physics: NeverScrollableScrollPhysics(),
           padding: EdgeInsets.all(paddingSize),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: gridSize,
-            crossAxisSpacing: paddingSize, // Espacement horizontal
-            mainAxisSpacing: paddingSize, // Espacement vertical
+            crossAxisSpacing: paddingSize, 
+            mainAxisSpacing: paddingSize, 
           ),
           itemCount: gridSize * gridSize,
           itemBuilder: (context, index) {
