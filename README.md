@@ -1,16 +1,44 @@
-# amse_crincket_salek
+# Projet Flutter - TP et Exercices
 
-A new Flutter project.
+**@authors :**
+Nathan CRINCKET & Adam SALEK
 
-## Getting Started
+## Description
+Ce dépôt contient le projet Flutter du Taquin, où nous travaillons ensemble. Pour les exercices, nous avons chacun travaillé sur des dépôts Git séparés. Vous trouverez ci-dessous les liens vers nos dépôts respectifs.
 
-This project is a starting point for a Flutter application.
+## Organisation
+- **Exercices** : Réalisés individuellement sur des dépôts séparés.
+- **TP** : Travail en commun sur ce dépôt.
 
-A few resources to get you started if this is your first Flutter project:
+## Liens vers les exercices
+- Nathan Crincket : [https://github.com/nathanckt/amse_crincket_salek]
+- Adam SALEK    : [https://github.com/adamsalek3/P5_AMSE/tree/main/exo_tp2]
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Prérequis
+- Flutter installé ([Guide officiel](https://docs.flutter.dev/get-started/install))
+- Dart installé (inclus avec Flutter)
+- Un émulateur ou un appareil physique pour tester
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+1. Cloner le dépôt :
+   ```sh
+   git clone https://github.com/nathanckt/amse_crincket_salek
+   ```
+2. Installer les dépendances :
+   ```sh
+   flutter pub get
+   ```
+3. Lancer l'application :
+   ```sh
+   flutter run
+   ```
+
+## Contact
+En cas de problème, n'hésitez pas à nous contacter.
+
+Nathan Crincket
+*[nathan.crincket@etu.imt-nord-europe.fr]*
+
+Adam Salek
+*[adam.salek@etu.imt-nord-europe.fr]*
+
