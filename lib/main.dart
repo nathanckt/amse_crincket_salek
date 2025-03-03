@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'exo1.dart'; 
+import 'exo1.dart';
 import 'exo2.dart';
 import 'exo4.dart';
 import 'exo5.dart';
 import 'exo6.dart';
 import 'taquin.dart';
-
 
 void main() {
   runApp(MyApp());
@@ -21,7 +20,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 
 class MenuPage extends StatelessWidget {
   @override
@@ -78,30 +76,30 @@ class MenuPage extends StatelessWidget {
               },
             ),
           ),
-           Card(
-             elevation: 6,
-             child: ListTile(
-               title: Text('Exercice 6'),
-               onTap: () {
-                 Navigator.push(
-                   context,
-                   MaterialPageRoute(builder: (context) => Exo6()),
-                 );
-               },
-             ),
-           ),
-           Card(
-             elevation: 7,
-             child: ListTile(
-               title: Text('Projet Taquin'),
-               onTap: () {
-                 Navigator.push(
-                   context,
-                   MaterialPageRoute(builder: (context) => Exo7()),
-                 );
-               },
-             ),
-           ),
+          Card(
+            elevation: 6,
+            child: ListTile(
+              title: Text('Exercice 6'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Exo6()),
+                );
+              },
+            ),
+          ),
+          Card(
+            elevation: 7,
+            child: ListTile(
+              title: Text('Projet Taquin'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Exo7()),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
