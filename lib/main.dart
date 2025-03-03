@@ -3,6 +3,7 @@ import 'exo1.dart';
 import 'exo2.dart';
 import 'exo4.dart';
 import 'exo5.dart';
+import 'exo6.dart';
 
 
 void main() {
@@ -76,6 +77,18 @@ class MenuPage extends StatelessWidget {
               },
             ),
           ),
+           Card(
+             elevation: 6,
+             child: ListTile(
+               title: Text('Exercice 6'),
+               onTap: () {
+                 Navigator.push(
+                   context,
+                   MaterialPageRoute(builder: (context) => Exo6()),
+                 );
+               },
+             ),
+           ),
         ],
       ),
     );
