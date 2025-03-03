@@ -43,32 +43,33 @@ class Grid extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        double tileSize = constraints.maxWidth / gridSize; // Taille d'une case
+        double tileSize = constraints.maxWidth / gridSize;
+        double paddingSize = 2.0; // Taille de l'espacement entre les cases
 
         return GridView.builder(
           physics: NeverScrollableScrollPhysics(),
+          padding: EdgeInsets.all(paddingSize),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: gridSize,
+            crossAxisSpacing: paddingSize, // Espacement horizontal
+            mainAxisSpacing: paddingSize, // Espacement vertical
           ),
           itemCount: gridSize * gridSize,
           itemBuilder: (context, index) {
             int row = index ~/ gridSize;
             int col = index % gridSize;
-            print(row);
-            print(gridSize);
 
-            return SizedBox(
-              width: tileSize,
-              height: tileSize,
-              child: ClipRect(
-                child: Align(
-                  alignment: Alignment(
-                    -1.0 + (col * 2.0 / (gridSize - 1)),
-                    -1.0 + (row * 2.0 / (gridSize - 1)),
-                  ),
-                  widthFactor: 1 / gridSize,
-                  heightFactor: 1 / gridSize,
-                  child: Image.network(imagePath, fit: BoxFit.cover),
+            return ClipRect(
+              child: FittedBox(
+                fit: BoxFit.none,
+                alignment: Alignment(
+                  -1.0 + (col * 2.0 / (gridSize - 1)),
+                  -1.0 + (row * 2.0 / (gridSize - 1)),
+                ),
+                child: Image.network(
+                  imagePath,
+                  width: constraints.maxWidth,
+                  height: constraints.maxWidth,
                 ),
               ),
             );
@@ -78,4 +79,3 @@ class Grid extends StatelessWidget {
     );
   }
 }
-
