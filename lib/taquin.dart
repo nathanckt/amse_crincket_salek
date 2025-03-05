@@ -12,11 +12,8 @@ class _Exo7State extends State<Exo7> {
   int moveCount = 0;
   String imagePath = 'https://picsum.photos/512/512';
   List<int> originalOrder = [];
-  List<String> assetImages = [
-    'assets/1.png',
-    'assets/2.png',
-    'assets/3.png'
-  ];
+  List<String> assetImages = ['assets/1.png', 'assets/2.png', 'assets/3.png'];
+  bool showNumbers = false;
 
   @override
   void initState() {
@@ -26,12 +23,12 @@ class _Exo7State extends State<Exo7> {
 
   void _initializeGrid() {
     moveCount = 0;
-    originalOrder = List.generate(gridSize * gridSize, (index) => index);
+    originalOrder =
+        List.generate(gridSize * gridSize, (index) => index); // Commence à 0
     List<int> numbers = List.from(originalOrder);
-    numbers.shuffle(Random());
-    while (!_isSolvable(numbers) || numbers.indexOf(0) != numbers.length - 1) {
+    do {
       numbers.shuffle(Random());
-    }
+    } while (!_isSolvable(numbers));
     grid = List.generate(
         gridSize, (i) => numbers.sublist(i * gridSize, (i + 1) * gridSize));
   }
@@ -45,9 +42,15 @@ class _Exo7State extends State<Exo7> {
         }
       }
     }
-    if (gridSize.isOdd) return inversions.isEven;
-    int emptyRow = gridSize - (numbers.indexOf(0) ~/ gridSize);
-    return (emptyRow.isEven) == (inversions.isOdd);
+
+    if (gridSize.isOdd) {
+      // Pour les grilles de taille impaire, le nombre d'inversions doit être pair
+      return inversions.isEven;
+    } else {
+      // Pour les grilles de taille paire, on ajoute la ligne de la case vide (en partant du bas)
+      int emptyRow = gridSize - (numbers.indexOf(0) ~/ gridSize);
+      return (inversions + emptyRow).isEven;
+    }
   }
 
   Tuple2<int, int> _findEmptyTile() {
@@ -77,11 +80,13 @@ class _Exo7State extends State<Exo7> {
   }
 
   bool _isWin() {
-    int count = 1;
+    int expectedValue = 0;
     for (int i = 0; i < gridSize; i++) {
       for (int j = 0; j < gridSize; j++) {
-        if (i == gridSize - 1 && j == gridSize - 1) return true;
-        if (grid[i][j] != originalOrder[i * gridSize + j]) return false;
+        if (grid[i][j] != expectedValue) {
+          return false;
+        }
+        expectedValue++;
       }
     }
     return true;
@@ -115,7 +120,8 @@ class _Exo7State extends State<Exo7> {
 
   void _selectRandomImage() {
     setState(() {
-      imagePath = 'https://picsum.photos/512?random=${DateTime.now().millisecondsSinceEpoch}';
+      imagePath =
+          'https://picsum.photos/512?random=${DateTime.now().millisecondsSinceEpoch}';
       _initializeGrid();
     });
   }
@@ -125,7 +131,19 @@ class _Exo7State extends State<Exo7> {
     double tileSize = 300 / gridSize;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Taquin - Exo 7')),
+      appBar: AppBar(
+        title: Text('Taquin - Exo 7'),
+        actions: [
+          IconButton(
+            icon: Icon(showNumbers ? Icons.visibility_off : Icons.visibility),
+            onPressed: () {
+              setState(() {
+                showNumbers = !showNumbers;
+              });
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Text("Nombre de coups : $moveCount", style: TextStyle(fontSize: 18)),
@@ -151,19 +169,46 @@ class _Exo7State extends State<Exo7> {
                           ),
                           child: tileNumber == 0
                               ? SizedBox.shrink()
-                              : ClipRect(
-                                  child: FittedBox(
-                                    fit: BoxFit.none,
-                                    alignment: Alignment(
-                                      -1.0 + ((tileNumber % gridSize) * 2.0 / (gridSize - 1)),
-                                      -1.0 + ((tileNumber ~/ gridSize) * 2.0 / (gridSize - 1))
+                              : Stack(
+                                  children: [
+                                    ClipRect(
+                                      child: FittedBox(
+                                        fit: BoxFit.none,
+                                        alignment: Alignment(
+                                            -1.0 +
+                                                ((tileNumber % gridSize) *
+                                                    2.0 /
+                                                    (gridSize - 1)),
+                                            -1.0 +
+                                                ((tileNumber ~/ gridSize) *
+                                                    2.0 /
+                                                    (gridSize - 1))),
+                                        child: Image.network(
+                                          imagePath,
+                                          width: 300,
+                                          height: 300,
+                                        ),
+                                      ),
                                     ),
-                                    child: Image.network(
-                                      imagePath,
-                                      width: 300,
-                                      height: 300,
-                                    ),
-                                  ),
+                                    if (showNumbers)
+                                      Center(
+                                        child: Text(
+                                          '$tileNumber',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(
+                                                color: Colors.black,
+                                                offset: Offset(1, 1),
+                                                blurRadius: 2,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                  ],
                                 ),
                         ),
                       );
@@ -180,7 +225,7 @@ class _Exo7State extends State<Exo7> {
                 Text("Taille de la grille : $gridSize x $gridSize"),
                 Slider(
                   value: gridSize.toDouble(),
-                  min: 3,
+                  min: 2,
                   max: 6,
                   divisions: 4,
                   label: '$gridSize x $gridSize',
