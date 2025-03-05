@@ -24,7 +24,7 @@ class _Exo7State extends State<Exo7> {
     originalOrder = List.generate(gridSize * gridSize, (index) => index);
     List<int> numbers = List.from(originalOrder);
     numbers.shuffle(Random());
-    while (!_isSolvable(numbers) || numbers.last != 0) {
+    while (!_isSolvable(numbers) || numbers.indexOf(0) != numbers.length - 1) {
       numbers.shuffle(Random());
     }
     grid = List.generate(
@@ -136,16 +136,8 @@ class _Exo7State extends State<Exo7> {
                                   child: FittedBox(
                                     fit: BoxFit.none,
                                     alignment: Alignment(
-                                      -1.0 +
-                                          ((originalOrder.indexOf(tileNumber) %
-                                                  gridSize) *
-                                              2.0 /
-                                              (gridSize - 1)),
-                                      -1.0 +
-                                          ((originalOrder.indexOf(tileNumber) ~/
-                                                  gridSize) *
-                                              2.0 /
-                                              (gridSize - 1)),
+                                      -1.0 + ((tileNumber % gridSize) * 2.0 / (gridSize - 1)),
+                                      -1.0 + ((tileNumber ~/ gridSize) * 2.0 / (gridSize - 1))
                                     ),
                                     child: Image.network(
                                       imagePath,
