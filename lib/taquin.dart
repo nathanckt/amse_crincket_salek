@@ -10,8 +10,13 @@ class _Exo7State extends State<Exo7> {
   int gridSize = 3;
   List<List<int>> grid = [];
   int moveCount = 0;
-  final String imagePath = 'https://picsum.photos/512/512';
+  String imagePath = 'https://picsum.photos/512/512';
   List<int> originalOrder = [];
+  List<String> assetImages = [
+    'assets/1.png',
+    'assets/2.png',
+    'assets/3.png'
+  ];
 
   @override
   void initState() {
@@ -101,6 +106,20 @@ class _Exo7State extends State<Exo7> {
     );
   }
 
+  void _selectImage(String path) {
+    setState(() {
+      imagePath = path;
+      _initializeGrid();
+    });
+  }
+
+  void _selectRandomImage() {
+    setState(() {
+      imagePath = 'https://picsum.photos/512?random=${DateTime.now().millisecondsSinceEpoch}';
+      _initializeGrid();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double tileSize = 300 / gridSize;
@@ -171,6 +190,29 @@ class _Exo7State extends State<Exo7> {
                       _initializeGrid();
                     });
                   },
+                ),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: _selectRandomImage,
+                      child: Text('Image aléatoire'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => _selectImage(assetImages[0]),
+                      child: Text('Niveau 1'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => _selectImage(assetImages[1]),
+                      child: Text('Niveau 2'),
+                    ),
+                    ElevatedButton(
+                      onPressed: () => _selectImage(assetImages[2]),
+                      child: Text('Niveau 3'),
+                    ),
+                  ],
                 ),
               ],
             ),
